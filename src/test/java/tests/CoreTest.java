@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import apiServices.PetsApi;
 import apiServices.UserApi;
