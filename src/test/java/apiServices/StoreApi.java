@@ -3,15 +3,18 @@ package apiServices;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
-import enums.LoginInfo;
+import util.CommonMethods;
 import util.Configuration;
 
 import java.io.IOException;
 
-public class UserApi {
-    private static String USER_ENDPOINT ="v2/user/";
-    private static String USER_ENDPOINT2 ="login/";
-    public Response userApiGetRequest(String name) throws IOException {
+public class StoreApi extends CommonMethods {
+    private static String STORE_ENDPONT1 = "v2/store/";
+    private static String STORE_ENDPOINT2 ="order/";
+    private static String STORE_ENDPOINT3 ="inventory/";
+
+
+    public Response getStore(int storeId) throws IOException {
         Configuration configuration = new Configuration();
         RestAssured.baseURI = configuration.getApiBaseUrl();
 
@@ -22,13 +25,14 @@ public class UserApi {
                 .header("api_key", configuration.getApiKey());
         return request
                 .when()
-                .get(USER_ENDPOINT + name)
+                .get(STORE_ENDPONT1 +STORE_ENDPOINT2+ "/" + storeId)
                 .then()
                 .extract()
                 .response();
     }
 
-    public Response getUserSession(LoginInfo username, LoginInfo password) throws IOException {
+
+    public Response getStoreInventory() throws IOException {
         Configuration configuration = new Configuration();
         RestAssured.baseURI = configuration.getApiBaseUrl();
 
@@ -36,14 +40,22 @@ public class UserApi {
                 .given()
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("api_key", configuration.getApiKey())
-                .queryParam("username",username.getLoginInfo())
-                .queryParam("password",password.getLoginInfo());
+                .header("api_key", configuration.getApiKey());
         return request
                 .when()
-                .get(USER_ENDPOINT + USER_ENDPOINT2)
+                .get(STORE_ENDPONT1 +STORE_ENDPOINT3)
                 .then()
                 .extract()
                 .response();
     }
+
+    public String getType(Response response){
+        return  getPathValue(response,"type");
+    }
+
+    public String getAvailable(Response response){
+        return  getPathValue(response,"available");
+    }
+
+
 }
