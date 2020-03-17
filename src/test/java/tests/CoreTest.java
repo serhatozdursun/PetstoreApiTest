@@ -102,6 +102,7 @@ public class CoreTest extends TestSetting {
         PetsApi petsApi = new PetsApi();
         //get request 5
         Response response =petsApi.petFindByStatus(situations);
+        Assert.assertEquals(response.statusCode(),200);
         response.prettyPrint();
     }
 }
