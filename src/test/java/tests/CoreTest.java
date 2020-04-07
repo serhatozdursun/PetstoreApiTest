@@ -5,8 +5,10 @@ import apiServices.StoreApi;
 import apiServices.UserApi;
 import baseSetting.TestSetting;
 import com.jayway.restassured.response.Response;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import static enums.LoginInfo.USER_NAME;
 import static enums.Status.AVAILABLE;
 import static enums.Status.PENDING;
 
+@Execution(ExecutionMode.CONCURRENT)
 public class CoreTest extends TestSetting {
 
 
@@ -25,7 +28,7 @@ public class CoreTest extends TestSetting {
     public void petEndPointTest() throws IOException {
         PetsApi petApi = new PetsApi();
         Response putApiResponse = petApi.petsApiPutResponse();
-        Assert.assertEquals("pets can not inserted ", 200, putApiResponse.statusCode());
+        Assertions.assertEquals(200, putApiResponse.statusCode(), "pets can not inserted ");
 
         petApi.petApiPutRequestResponseSchemaIsValid(putApiResponse);
         //get petId from JsonPath
@@ -33,7 +36,7 @@ public class CoreTest extends TestSetting {
 
         //get request 1
         Response getApiResponse = petApi.petApiGetRequest(petId);
-        Assert.assertEquals("pets can not get", 200, putApiResponse.statusCode());
+        Assertions.assertEquals(200, putApiResponse.statusCode(), "pets can not get");
 
         petApi.petApiGetRequestResponseSchemaIsValid(getApiResponse);
         petApi.comparePutDataAndGetData(putApiResponse, getApiResponse);
@@ -44,15 +47,15 @@ public class CoreTest extends TestSetting {
         petApi.petApiUpdateRequest(petId, name, status);
 
         getApiResponse = petApi.petApiGetRequest(petId);
-        Assert.assertEquals("pets can not get", 200, putApiResponse.statusCode());
+        Assertions.assertEquals(200, putApiResponse.statusCode(), "pets can not get");
 
-        Assert.assertEquals("Pet name was not updated", name, petApi.getPetName(getApiResponse));
-        Assert.assertEquals("Pet status was not updated", status, petApi.getPetstatus(getApiResponse));
+        Assertions.assertEquals(name, petApi.getPetName(getApiResponse), "Pet name was not updated");
+        Assertions.assertEquals(status, petApi.getPetstatus(getApiResponse), "Pet status was not updated");
 
         petApi.petApiDeleteRequest(petId);
 
         getApiResponse = petApi.petApiGetRequest(petId);
-        Assert.assertEquals("pets can not deleted ", 404, getApiResponse.statusCode());
+        Assertions.assertEquals(404, getApiResponse.statusCode(), "pets can not deleted ");
         getApiResponse.prettyPrint();
     }
 
@@ -60,22 +63,24 @@ public class CoreTest extends TestSetting {
     public void getUserNotFoundTest() throws IOException {
         UserApi userApi = new UserApi();
         Response response = userApi.userApiGetRequest("notExists");
-        Assert.assertEquals("invalid user name but response status code is not 404", 404, response.statusCode());
+        Assertions.assertEquals(404, response.statusCode(), "invalid user name but response status code is not 404");
     }
 
     @Test
+
     public void getStoreTest() throws IOException {
         StoreApi storeApi = new StoreApi();
         //get request 2
         Response response = storeApi.getStore(5);
-        Assert.assertEquals("unknown", storeApi.getType(response));
-        Assert.assertEquals(response.statusCode(), 404);
+        Assertions.assertEquals("unknown", storeApi.getType(response));
+        Assertions.assertEquals(response.statusCode(), 404);
         //get request 3 no parameter
         Response inventoryRespons = storeApi.getStoreInventory();
-        Assert.assertEquals(inventoryRespons.statusCode(), 200);
+        Assertions.assertEquals(inventoryRespons.statusCode(), 200);
     }
 
     @Test
+
     public void getSessionId() throws IOException {
         UserApi userApi = new UserApi();
         // parameter get request 4
@@ -102,7 +107,7 @@ public class CoreTest extends TestSetting {
         PetsApi petsApi = new PetsApi();
         //get request 5
         Response response =petsApi.petFindByStatus(situations);
-        Assert.assertEquals(response.statusCode(),200);
+        Assertions.assertEquals(response.statusCode(), 200);
         response.prettyPrint();
     }
 }

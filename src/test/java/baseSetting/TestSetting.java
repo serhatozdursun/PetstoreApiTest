@@ -1,16 +1,19 @@
 package baseSetting;
 
-import org.junit.After;
-import org.junit.Before;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TestSetting {
 
-    @Before
+    @BeforeEach
     public void doSomeThingBeforeTest(){
         System.out.println("do something before test");
     }
 
-    @After
+    @AfterEach
     public void doSomeThingAfterTest(){
         System.out.println("do something after test");
     }

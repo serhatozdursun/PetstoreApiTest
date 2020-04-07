@@ -5,7 +5,8 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.junit.Assert;
+
+import org.junit.jupiter.api.Assertions;
 import util.CommonMethods;
 import util.Configuration;
 
@@ -142,7 +143,7 @@ public class PetsApi extends CommonMethods {
     }
 
     public void comparePutDataAndGetData(Response putApiResponse, Response getApiResponse) {
-        Assert.assertEquals(getApiResponse.getBody().asString(), putApiResponse.getBody().asString());
+        Assertions.assertEquals(getApiResponse.getBody().asString(), putApiResponse.getBody().asString());
     }
 
     public String getPetName(Response response){
