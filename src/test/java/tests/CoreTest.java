@@ -67,7 +67,6 @@ public class CoreTest extends TestSetting {
     }
 
     @Test
-
     public void getStoreTest() throws IOException {
         StoreApi storeApi = new StoreApi();
         //get request 2
@@ -80,7 +79,6 @@ public class CoreTest extends TestSetting {
     }
 
     @Test
-
     public void getSessionId() throws IOException {
         UserApi userApi = new UserApi();
         // parameter get request 4
