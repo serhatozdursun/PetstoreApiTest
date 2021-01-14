@@ -130,7 +130,7 @@ public class PetsApi extends CommonMethods {
     }
 
     public void petApiPutRequestResponseSchemaIsValid(Response response) {
-        isJsonSchemaMatches(response, System.getProperty("user.dir") + "\\src\\test\\resources\\jsonSchemas\\petApiPutSchema.JSON");
+        isJsonSchemaMatches(response, getClass().getClassLoader().getResource("jsonSchemas/petApiPutSchema.JSON").getPath());
     }
 
     public int getPetIdInPatPutApiResponse(Response response) {
@@ -139,19 +139,19 @@ public class PetsApi extends CommonMethods {
 
 
     public void petApiGetRequestResponseSchemaIsValid(Response response) {
-        isJsonSchemaMatches(response, System.getProperty("user.dir") + "\\src\\test\\resources\\jsonSchemas\\petApiGetSchema.JSON");
+        isJsonSchemaMatches(response, getClass().getClassLoader().getResource("jsonSchemas/petApiGetSchema.JSON").getPath());
     }
 
     public void comparePutDataAndGetData(Response putApiResponse, Response getApiResponse) {
         Assertions.assertEquals(getApiResponse.getBody().asString(), putApiResponse.getBody().asString());
     }
 
-    public String getPetName(Response response){
-        return  getPathValue(response,"name");
+    public String getPetName(Response response) {
+        return getPathValue(response, "name");
     }
 
-    public String getPetstatus(Response response){
-        return  getPathValue(response,"status");
+    public String getPetstatus(Response response) {
+        return getPathValue(response, "status");
     }
 
 }

@@ -19,6 +19,7 @@ public class Configuration {
     public String getApiBaseUrl() {
         return prop.getProperty("api.base.url");
     }
+
     public String getApiKey() {
         return prop.getProperty("api.key");
     }
@@ -29,6 +30,6 @@ public class Configuration {
     }
 
     public String readEnvironment() {
-        return configPropPath = System.getProperty("user.dir") + "\\src\\test\\resources\\config.properties";
+        return configPropPath = getClass().getClassLoader().getResource("config.properties").getPath();
     }
 }
