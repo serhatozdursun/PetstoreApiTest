@@ -1,8 +1,9 @@
 package apiServices;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -20,7 +21,7 @@ public class PetsApi extends CommonMethods {
 
     public Response petsApiPutResponse() throws IOException {
         Configuration configuration = new Configuration();
-        RestAssured.baseURI = configuration.getApiBaseUrl();
+        String baseUrl = configuration.getApiBaseUrl();
 
         JSONObject categoryParams = new JSONObject();
         categoryParams.put("id", createRandomInt());
@@ -49,7 +50,8 @@ public class PetsApi extends CommonMethods {
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("api_key", configuration.getApiKey())
-                .body(requestParams.toJSONString());
+                .body(requestParams.toJSONString())
+                .baseUri(baseUrl);
 
         return request
                 .when()

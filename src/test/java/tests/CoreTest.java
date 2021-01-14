@@ -4,7 +4,7 @@ import apiServices.PetsApi;
 import apiServices.StoreApi;
 import apiServices.UserApi;
 import baseSetting.TestSetting;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;

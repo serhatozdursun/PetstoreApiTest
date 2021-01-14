@@ -8,6 +8,11 @@
     <artifactId>PetstoreApiTest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
+    <properties>
+        <rest.assured.versin>4.3.3</rest.assured.versin>
+        <jupiter.version>5.3.1</jupiter.version>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -46,16 +51,23 @@
     </build>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>2.9.0</version>
+            <version>${rest.assured.versin}</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-path -->
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${rest.assured.versin}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
-            <version>2.9.0</version>
+            <version>${rest.assured.versin}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -63,12 +75,6 @@
             <artifactId>json-simple</artifactId>
             <version>1.1</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.14.0</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -78,7 +84,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.3.1</version>
+            <version>${jupiter.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>

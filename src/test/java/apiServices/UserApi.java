@@ -1,9 +1,10 @@
 package apiServices;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+
 import enums.LoginInfo;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import util.Configuration;
 
 import java.io.IOException;
